@@ -3,11 +3,18 @@
 	"parent": "block/thin_block",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "wrs:center",
-		"center": "wrs:center",
-		"antenna": "wrs:antenna",
-		"base": "wrs:base"
+		"center": "wrs:block/center",
+		"antenna": "wrs:block/antenna",
+		"particle": "wrs:block/base",
+		"base": "wrs:block/base"
 	},
+	"display": {
+		"gui": {
+			"rotation": [ 30, 45, 0 ],
+			"translation": [ 0, 0, 0],
+			"scale": [ 0.625, 0.625, 0.625 ]
+		}
+  	},
 	"elements": [
 		{
 			"name": "base",
@@ -23,55 +30,7 @@
 			}
 		},
 		{
-			"name": "sides_overlay",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"color": 0,
-			"faces": {
-				"north": {"uv": [0, 0, 16, 2], "texture": "#missing", "cullface": "north", "tintindex": 0},
-				"east": {"uv": [0, 2, 16, 4], "texture": "#missing", "cullface": "east", "tintindex": 1},
-				"south": {"uv": [0, 4, 16, 6], "texture": "#missing", "cullface": "south", "tintindex": 2},
-				"west": {"uv": [0, 6, 16, 8], "texture": "#missing", "cullface": "west", "tintindex": 3}
-			}
-		},
-		{
-			"name": "base_top_overlay_north",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"color": 5,
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#missing", "tintindex": 0}
-			}
-		},
-		{
-			"name": "base_top_overlay_east",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"color": 9,
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#missing", "tintindex": 1}
-			}
-		},
-		{
-			"name": "base_top_overlay_south",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"color": 3,
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#missing", "tintindex": 2}
-			}
-		},
-		{
-			"name": "base_top_overlay_west",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"color": 8,
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#missing", "tintindex": 3}
-			}
-		},
-		{
-			"name": "rod",
+			"name": "center",
 			"from": [7, 2, 7],
 			"to": [9, 11, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 7]},
@@ -98,11 +57,5 @@
 				"down": {"uv": [0, 2, 2, 4.2], "texture": "#antenna"}
 			}
 		}
-	],
-	"display": {
-		"gui": {
-			"rotation": [30, 45, 0],
-			"scale": [0.625, 0.625, 0.625]
-		}
-	}
+	]
 }

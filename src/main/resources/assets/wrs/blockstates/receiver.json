@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": {
+            "model": "wrs:block/receiver"
+        },
+        "powered=true": {
+            "model": "wrs:block/receiver"
+        }
+    }
+}
