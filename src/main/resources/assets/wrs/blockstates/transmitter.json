@@ -1,10 +1,10 @@
 {
     "variants": {
         "": {
-            "model": "wrs:block/transmitter"
+            "model": "wrs:block/transmitter_unpowered"
         },
         "powered=true": {
-            "model": "wrs:block/transmitter"
+            "model": "wrs:block/transmitter_powered"
         }
     }
 }

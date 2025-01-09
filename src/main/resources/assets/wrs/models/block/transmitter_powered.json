@@ -1,0 +1,6 @@
+{
+    "parent": "wrs:block/transmitter_unpowered",
+    "textures": {
+		"antenna": "wrs:block/redstone"
+    }
+}
