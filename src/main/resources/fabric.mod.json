@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "wireless-redstone-signals",
+	"version": "${version}",
+	"name": "Wireless Redstone Signals",
+	"description": "A transmitter and receiver to transmit all your redstone signals wirelessly.",
+	"authors": [
+		"Inferis"
+	],
+	"contact": {
+		"homepage": "https://inferis.org",
+		"sources": "https://github.com/Inferis/wireless-redstone-signals"
+	},
+	"license": "MIT",
+	"icon": "assets/wrs/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"wirelessredstonesignals.Wirelessredstonesignals"
+		],
+		"client": [
+			"wirelessredstonesignals.WirelessredstonesignalsClient"
+		]
+	},
+	"mixins": [
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
