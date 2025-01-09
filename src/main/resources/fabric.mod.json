@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"wirelessredstonesignals.Wirelessredstonesignals"
+			"wrs.WRS"
 		],
 		"client": [
-			"wirelessredstonesignals.WirelessredstonesignalsClient"
+			"wrs.WRSClient"
 		]
 	},
 	"mixins": [
