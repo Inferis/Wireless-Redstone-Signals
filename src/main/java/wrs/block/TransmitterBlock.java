@@ -29,7 +29,9 @@ import wrs.item.LinkerItem;
 public class TransmitterBlock extends Block implements BlockEntityProvider {
     public TransmitterBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(Properties.POWERED, false));
+        setDefaultState(getDefaultState()
+            .with(Properties.POWERED, false)
+            .with(Properties.POWER, 0));
     }
 
     @Override

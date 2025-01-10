@@ -7,6 +7,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.util.math.BlockPos;
 import wrs.networking.OpenConfigPanelS2CPayload;
+import wrs.networking.SaveNetworkNameC2SPayload;
 
 public abstract class AbstractNetworkBlockEntity extends BlockEntity {
     private String networkName = "Default";
@@ -16,9 +17,11 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
     }
 
     public OpenConfigPanelS2CPayload getOpenConfigPanelPayload(BlockPos pos) {
-        return new OpenConfigPanelS2CPayload(pos, networkName);
+        return new OpenConfigPanelS2CPayload(pos, isTransmitter(), networkName);
     }    
 
+    abstract protected Boolean isTransmitter();
+    
     @Override
     protected void readNbt(NbtCompound nbt, WrapperLookup registries) {
         super.readNbt(nbt, registries);
@@ -38,5 +41,9 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
 
     public String getNetworkName() {
         return networkName;
+    }
+
+    public void updateFromPayload(SaveNetworkNameC2SPayload payload) {
+        registerNetworkName(payload.networkName());
     }
 }

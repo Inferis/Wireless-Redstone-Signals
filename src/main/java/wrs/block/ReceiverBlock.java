@@ -24,7 +24,9 @@ import wrs.item.LinkerItem;
 public class ReceiverBlock extends Block implements BlockEntityProvider {
     public ReceiverBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(Properties.POWERED, false));
+        setDefaultState(getDefaultState()
+            .with(Properties.POWERED, false)
+            .with(Properties.POWER, 0));
     }
 
     @Override
