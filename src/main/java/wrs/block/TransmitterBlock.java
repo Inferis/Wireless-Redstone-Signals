@@ -98,10 +98,8 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
 
     private void updateTransmittedPower(WorldAccess world, BlockPos pos, int power) {
         if (world.getBlockEntity(pos) instanceof AbstractNetworkBlockEntity networkEntity) {
-            WRS.LOGGER.info("sending power to network " + networkEntity.getNetworkName());
             for (var receiverPos: Networks.getReceivers(networkEntity.getNetworkName())) {
                 if (world.getBlockEntity(receiverPos) instanceof ReceiverBlockEntity) {
-                    WRS.LOGGER.info("sending power to " + receiverPos);
                     var receiverState = world.getBlockState(receiverPos);
                     receiverState = receiverState
                         .with(Properties.POWERED, power > 0)

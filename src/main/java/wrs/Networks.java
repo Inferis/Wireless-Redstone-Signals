@@ -65,28 +65,24 @@ public class Networks {
 
         public void addTransmitter(BlockPos pos) {
             if (!transmitters.contains(pos)) {
-                WRS.LOGGER.info("Adding transmitter + " + pos + " to " + networkName);
                 transmitters.add(pos);
             }
         }
 
         public void removeTransmitter(BlockPos pos) {
             if (transmitters.contains(pos)) {
-                WRS.LOGGER.info("Removing transmitter + " + pos + " from " + networkName);
                 transmitters.remove(pos);
             }
         }
 
         public void addReceiver(BlockPos pos) {
             if (!receivers.contains(pos)) {
-                WRS.LOGGER.info("Adding receiver + " + pos + " to " + networkName);
                 receivers.add(pos);
             }
         }
 
         public void removeReceiver(BlockPos pos) {
             if (receivers.contains(pos)) {
-                WRS.LOGGER.info("Removing receiver + " + pos + " from " + networkName);
                 receivers.remove(pos);
             }
         }
