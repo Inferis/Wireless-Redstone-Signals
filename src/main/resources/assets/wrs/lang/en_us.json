@@ -1,5 +1,6 @@
 {
     "screen.wrs.configpanel_screen.title": "Config Panel",
     "block.wrs.receiver": "Redstone Receiver",
-    "block.wrs.transmitter": "Redstone Transmitter"
+    "block.wrs.transmitter": "Redstone Transmitter",
+    "item.wrs.linker": "Redstone Linker"
 }

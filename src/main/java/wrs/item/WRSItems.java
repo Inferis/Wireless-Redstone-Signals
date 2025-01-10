@@ -11,6 +11,7 @@ import wrs.block.WRSBlocks;
 public class WRSItems {
     public static ReceiverBlockItem RECEIVER;
     public static TransmitterBlockItem TRANSMITTER;
+    public static LinkerItem LINKER;
 
     interface ItemMaker<T extends Item> {
         T makeItem(RegistryKey<Item> key);
@@ -33,6 +34,9 @@ public class WRSItems {
         });
         TRANSMITTER = registerItem("transmitter", key -> { 
             return new TransmitterBlockItem(WRSBlocks.TRANSMITTER, new Item.Settings().useBlockPrefixedTranslationKey().registryKey(key)); 
+        });
+        LINKER = registerItem("linker", key -> { 
+            return new LinkerItem(new Item.Settings().useItemPrefixedTranslationKey().registryKey(key)); 
         });
     }    
 
