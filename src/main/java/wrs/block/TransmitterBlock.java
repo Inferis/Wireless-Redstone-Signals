@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,6 +15,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.block.WireOrientation;
@@ -24,6 +27,8 @@ import wrs.item.LinkerItem;
 import wrs.item.WRSComponents;
 
 public class TransmitterBlock extends Block implements BlockEntityProvider {
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0);
+
     public TransmitterBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
@@ -40,6 +45,11 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(Properties.POWERED);
         builder.add(Properties.POWER);
+    }
+
+    @Override
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return SHAPE;
     }
 
     @Override
