@@ -32,6 +32,7 @@ public class WRS implements ModInitializer {
 		WRSItems.registerItems();
 		WRSItemGroups.registerItemGroups();
 		WRSCommands.registerCommands();
+		WRSSounds.registerSounds();
 		
 		registerNetworkPayloads();
 		registerNetworkReceivers();

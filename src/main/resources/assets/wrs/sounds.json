@@ -1,0 +1,14 @@
+{
+    "linker_pickup": {
+        "subtitle": "sound.wrs.linker_pickup_sound",
+        "sounds": [
+            "wrs:linker_pickup"
+        ]
+    },
+    "linker_apply": {
+        "subtitle": "sound.wrs.linker_apply_sound",
+        "sounds": [
+            "wrs:linker_apply"
+        ]
+    }    
+}
