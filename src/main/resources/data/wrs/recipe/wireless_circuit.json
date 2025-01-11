@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "redstone",
+    "pattern": [
+        "GGG",
+        "RER",
+        "GGG"
+    ],
+    "key": {
+        "G": "minecraft:gold_nugget",
+        "R": "minecraft:redstone",
+        "E": "minecraft:ender_pearl"
+    },
+    "result": {
+        "id": "wrs:wireless_circuit"
+    }
+  }

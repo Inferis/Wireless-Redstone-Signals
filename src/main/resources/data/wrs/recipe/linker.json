@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "redstone",
+    "pattern": [
+        " T ",
+        "IWI",
+        "III"
+    ],
+    "key": {
+        "I": "minecraft:iron_ingot",
+        "W": "wrs:wireless_circuit",
+        "T": "minecraft:redstone_torch"
+    },
+    "result": {
+        "id": "wrs:linker"
+    }
+  }

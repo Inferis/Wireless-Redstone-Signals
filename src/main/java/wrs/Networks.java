@@ -34,7 +34,6 @@ public class Networks {
             networks.put(networkName, network);
         }
         network.addReceiver(pos);
-        WRS.LOGGER.info("adding receiver " + pos + " from " + networkName);
     }
 
     public static List<BlockPos> getTransmitters(String networkName) {
@@ -65,7 +64,6 @@ public class Networks {
     }
 
     public static void removeReceiver(BlockPos pos, String networkName) {
-        WRS.LOGGER.info("remove receiver " + pos + " from " + networkName);
         var network = networks.get(networkName);
         if (network != null) {
             network.removeReceiver(pos);

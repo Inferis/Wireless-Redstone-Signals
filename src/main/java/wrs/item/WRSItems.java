@@ -12,6 +12,7 @@ public class WRSItems {
     public static ReceiverBlockItem RECEIVER;
     public static TransmitterBlockItem TRANSMITTER;
     public static LinkerItem LINKER;
+    public static WirelessCircuitItem WIRELESS_CIRCUIT;
 
     interface ItemMaker<T extends Item> {
         T makeItem(RegistryKey<Item> key);
@@ -37,6 +38,9 @@ public class WRSItems {
         });
         LINKER = registerItem("linker", key -> { 
             return new LinkerItem(new Item.Settings().useItemPrefixedTranslationKey().registryKey(key)); 
+        });
+        WIRELESS_CIRCUIT = registerItem("wireless_circuit", key -> { 
+            return new WirelessCircuitItem(new Item.Settings().useItemPrefixedTranslationKey().registryKey(key)); 
         });
     }    
 

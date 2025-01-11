@@ -2,15 +2,15 @@
     "type": "minecraft:crafting_shaped",
     "category": "redstone",
     "pattern": [
-        " E ",
         "RTR",
+        " W ",
         "SSS"
     ],
     "key": {
         "S": "minecraft:stone",
         "R": "minecraft:redstone",
         "T": "minecraft:redstone_torch",
-        "E": "minecraft:ender_pearl"
+        "W": "wrs:wireless_circuit"
     },
     "result": {
         "id": "wrs:transmitter"

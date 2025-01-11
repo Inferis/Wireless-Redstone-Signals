@@ -11,6 +11,8 @@ public class WRSItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> {
             content.add(WRSItems.RECEIVER);
             content.add(WRSItems.TRANSMITTER);
+            content.add(WRSItems.LINKER);
+            content.add(WRSItems.WIRELESS_CIRCUIT);
         });
     }       
 }
