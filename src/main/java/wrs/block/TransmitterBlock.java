@@ -68,7 +68,9 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        world.getBlockEntity(pos).markDirty(); // save network name
+        if (world.getBlockEntity(pos) instanceof TransmitterBlockEntity transmitterBlockEntity) {
+            transmitterBlockEntity.registerNetworkName();
+        } 
 
         var power = world.getReceivedRedstonePower(pos);
         updateTransmittedPower(world, pos, power);

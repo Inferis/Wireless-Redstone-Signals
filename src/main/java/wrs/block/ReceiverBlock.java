@@ -78,7 +78,10 @@ public class ReceiverBlock extends Block implements BlockEntityProvider {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        world.getBlockEntity(pos).markDirty(); // save network name
+        if (world.getBlockEntity(pos) instanceof ReceiverBlockEntity receiverBlockEntity) {
+            receiverBlockEntity.registerNetworkName();
+            Networks.propagateUpdate(receiverBlockEntity.getNetworkName(), world);
+        } 
     }
 
     @Override
