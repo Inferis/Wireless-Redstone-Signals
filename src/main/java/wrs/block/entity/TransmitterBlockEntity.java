@@ -1,11 +1,8 @@
 package wrs.block.entity;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import wrs.Networks;
-import wrs.WRS;
-import wrs.block.TransmitterBlock;
 import wrs.networking.SaveNetworkNameC2SPayload;
 
 public class TransmitterBlockEntity extends AbstractNetworkBlockEntity {
@@ -19,7 +16,7 @@ public class TransmitterBlockEntity extends AbstractNetworkBlockEntity {
             Networks.removeTransmitter(getNetworkName(), pos);
         }
         super.registerNetworkName(networkName);
-        Networks.registerTransmitter(pos, networkName);
+        Networks.addTransmitter(pos, networkName);
     }
 
     @Override

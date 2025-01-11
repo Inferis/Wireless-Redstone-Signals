@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import wrs.Networks;
 import wrs.block.entity.ReceiverBlockEntity;
 import wrs.item.LinkerItem;
 
@@ -43,9 +42,7 @@ public class ReceiverBlock extends Block implements BlockEntityProvider {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient && world.getBlockEntity(pos) instanceof ReceiverBlockEntity receiverBlockEntity) {
-            if (player.getMainHandStack().getItem() instanceof LinkerItem linkerItem) {
-            }
-            else {
+            if (!(player.getMainHandStack().getItem() instanceof LinkerItem)) {
                 ServerPlayNetworking.send((ServerPlayerEntity)player, receiverBlockEntity.getOpenConfigPanelPayload(pos));
             }
             return ActionResult.SUCCESS;

@@ -3,6 +3,9 @@
     "block.wrs.transmitter": "Redstone Transmitter",
     "item.wrs.linker": "Redstone Linker",
 
+    "item.wrs.linker.tooltip.network_name": "Network Name: ",
+    "item.wrs.linker.tooltip.not_linked": "Not linked",
+
     "screen.wrs.config_panel.transmitter_title": "Transmitter Config Panel",
     "screen.wrs.config_panel.receiver_title": "Receiver Config Panel",
     "screen.wrs.config_panel.label.network_name": "Network Name:",

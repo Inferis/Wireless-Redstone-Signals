@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import wrs.block.WRSBlocks;
 import wrs.block.entity.AbstractNetworkBlockEntity;
 import wrs.block.entity.WRSBlockEntities;
+import wrs.item.WRSComponents;
 import wrs.item.WRSItemGroups;
 import wrs.item.WRSItems;
 import wrs.networking.OpenConfigPanelS2CPayload;
@@ -27,9 +28,10 @@ public class WRS implements ModInitializer {
 	public void onInitialize() {
 		WRSBlocks.registerBlocks();
 		WRSBlockEntities.registerBlockEntities();
+		WRSComponents.registerComponents();
 		WRSItems.registerItems();
 		WRSItemGroups.registerItemGroups();
-
+		
 		registerNetworkPayloads();
 		registerNetworkReceivers();
 	}

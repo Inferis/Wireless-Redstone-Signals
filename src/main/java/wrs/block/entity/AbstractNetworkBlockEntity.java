@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.util.math.BlockPos;
+import wrs.WRS;
 import wrs.networking.OpenConfigPanelS2CPayload;
 import wrs.networking.SaveNetworkNameC2SPayload;
 
@@ -17,7 +18,7 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
     }
 
     public OpenConfigPanelS2CPayload getOpenConfigPanelPayload(BlockPos pos) {
-        return new OpenConfigPanelS2CPayload(pos, isTransmitter(), networkName);
+        return new OpenConfigPanelS2CPayload(pos, isTransmitter(), getNetworkName());
     }    
 
     abstract protected Boolean isTransmitter();
@@ -30,12 +31,13 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
 
     @Override
     protected void writeNbt(NbtCompound nbt, WrapperLookup registries) {
+        WRS.LOGGER.info("write nbt " + networkName);
         super.writeNbt(nbt, registries);
         nbt.putString("network_name", networkName);
-        registerNetworkName(networkName);
     }
 
     protected void registerNetworkName(String networkName) {
+        WRS.LOGGER.info("registering network name (old =" + getNetworkName() + ") to " + networkName);
         this.networkName = networkName;
     }
 
@@ -45,5 +47,6 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
 
     public void updateFromPayload(SaveNetworkNameC2SPayload payload) {
         registerNetworkName(payload.networkName());
+        markDirty();
     }
 }

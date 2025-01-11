@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 public class Networks {
     private static HashMap<String, Network> networks = new LinkedHashMap<>();
 
-    public static void registerTransmitter(BlockPos pos, String networkName) {
+    public static void addTransmitter(BlockPos pos, String networkName) {
         var network = networks.get(networkName);
         if (network == null) {
             network = new Network(networkName);
@@ -19,7 +19,7 @@ public class Networks {
         network.addTransmitter(pos);
     }
 
-    public static void registerReceiver(BlockPos pos, String networkName) {
+    public static void addReceiver(BlockPos pos, String networkName) {
         var network = networks.get(networkName);
         if (network == null) {
             network = new Network(networkName);

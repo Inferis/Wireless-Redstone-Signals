@@ -1,7 +1,5 @@
 package wrs.block;
 
-import java.util.List;
-
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -20,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.block.WireOrientation;
 import wrs.Networks;
-import wrs.WRS;
-import wrs.block.entity.AbstractNetworkBlockEntity;
 import wrs.block.entity.ReceiverBlockEntity;
 import wrs.block.entity.TransmitterBlockEntity;
 import wrs.item.LinkerItem;
@@ -79,9 +75,7 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient && world.getBlockEntity(pos) instanceof TransmitterBlockEntity transmitterBlockEntity) {
-            if (player.getMainHandStack().getItem() instanceof LinkerItem linkerItem) {
-            }
-            else {
+            if (!(player.getMainHandStack().getItem() instanceof LinkerItem)) {
                 ServerPlayNetworking.send((ServerPlayerEntity)player, transmitterBlockEntity.getOpenConfigPanelPayload(pos));
             }
             return ActionResult.SUCCESS;
@@ -97,18 +91,27 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
     }
 
     private void updateTransmittedPower(WorldAccess world, BlockPos pos, int power) {
-        if (world.getBlockEntity(pos) instanceof AbstractNetworkBlockEntity networkEntity) {
-            for (var receiverPos: Networks.getReceivers(networkEntity.getNetworkName())) {
-                if (world.getBlockEntity(receiverPos) instanceof ReceiverBlockEntity) {
-                    var receiverState = world.getBlockState(receiverPos);
-                    receiverState = receiverState
-                        .with(Properties.POWERED, power > 0)
-                        .with(Properties.POWER, power);
-                    world.setBlockState(receiverPos, receiverState, Block.NOTIFY_ALL);
+        if (world.getBlockEntity(pos) instanceof TransmitterBlockEntity transmitterBlockEntity) {
+            var transmitterName = transmitterBlockEntity.getNetworkName();  
+            for (var receiverPos: Networks.getReceivers(transmitterName)) {
+                if (world.getBlockEntity(receiverPos) instanceof ReceiverBlockEntity receiverBlockEntity) {
+                    var receiverName = receiverBlockEntity.getNetworkName();
+                    // make sure we're talking about the same network
+                    if (receiverName.equals(transmitterName)) {
+                        var receiverState = world.getBlockState(receiverPos);
+                        receiverState = receiverState
+                            .with(Properties.POWERED, power > 0)
+                            .with(Properties.POWER, power);
+                        world.setBlockState(receiverPos, receiverState, Block.NOTIFY_ALL);
+                    }
+                    else {
+                        // doesn't match for whatever reason, remove
+                        Networks.removeReceiver(transmitterName, pos);
+                    }
                 }
                 else {
                     // doesn't exist anymore
-                    Networks.removeReceiver(networkEntity.getNetworkName(), pos);
+                    Networks.removeReceiver(transmitterName, pos);
                 }
             }
         }
