@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "redstone",
+    "pattern": [
+        "RTR",
+        "SSS",
+        "   "
+    ],
+    "key": {
+        "S": "minecraft:stone",
+        "R": "minecraft:redstone",
+        "T": "minecraft:redstone_torch"
+    },
+    "result": {
+        "id": "wrs:receiver"
+    }
+  }
