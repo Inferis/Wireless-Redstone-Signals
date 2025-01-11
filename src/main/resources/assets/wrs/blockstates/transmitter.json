@@ -1,6 +1,6 @@
 {
     "variants": {
-        "": {
+        "powered=false": {
             "model": "wrs:block/transmitter_unpowered"
         },
         "powered=true": {
