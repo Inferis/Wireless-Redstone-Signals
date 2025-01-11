@@ -4,7 +4,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import wrs.Networks;
-import wrs.WRS;
 
 public class ReceiverBlockEntity extends AbstractNetworkBlockEntity {
     public ReceiverBlockEntity(BlockPos pos, BlockState state) {
@@ -13,8 +12,8 @@ public class ReceiverBlockEntity extends AbstractNetworkBlockEntity {
 
     @Override
     protected void registerNetworkName(String networkName) {
-        if (getNetworkName() != networkName) {
-            Networks.removeReceiver(getNetworkName(), pos);
+        if (!getNetworkName().equals(networkName)) {
+            Networks.removeReceiver(pos, getNetworkName());
         }
         super.registerNetworkName(networkName);
         Networks.addReceiver(pos, networkName);
@@ -26,7 +25,6 @@ public class ReceiverBlockEntity extends AbstractNetworkBlockEntity {
     }
 
     public void setNetworkName(String networkName) {
-        WRS.LOGGER.info("setting network name from " + getNetworkName() + " to " + networkName);
         registerNetworkName(networkName);
         markDirty();
     }

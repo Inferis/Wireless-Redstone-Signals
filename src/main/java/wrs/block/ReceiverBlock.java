@@ -8,7 +8,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -17,8 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import wrs.Networks;
+import wrs.WRS;
+import wrs.WRSSounds;
 import wrs.block.entity.ReceiverBlockEntity;
 import wrs.item.LinkerItem;
+import wrs.item.WRSComponents;
 
 public class ReceiverBlock extends Block implements BlockEntityProvider {
     public ReceiverBlock(Settings settings) {
@@ -42,7 +48,19 @@ public class ReceiverBlock extends Block implements BlockEntityProvider {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient && world.getBlockEntity(pos) instanceof ReceiverBlockEntity receiverBlockEntity) {
-            if (!(player.getMainHandStack().getItem() instanceof LinkerItem)) {
+            var stack = player.getMainHandStack();
+            if (stack.getItem() instanceof LinkerItem) {
+                var name = stack.get(WRSComponents.NETWORK_NAME_COMPONENT_TYPE);
+                if (name != null && name.length() > 0) {
+                    receiverBlockEntity.setNetworkName(name);
+                    Networks.propagateUpdate(name, world);
+                    return ActionResult.SUCCESS;
+                }
+                else {
+                    return ActionResult.FAIL;
+                }
+            }
+            else {
                 ServerPlayNetworking.send((ServerPlayerEntity)player, receiverBlockEntity.getOpenConfigPanelPayload(pos));
             }
             return ActionResult.SUCCESS;

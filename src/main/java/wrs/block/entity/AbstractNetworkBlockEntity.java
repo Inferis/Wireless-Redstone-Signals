@@ -26,18 +26,19 @@ public abstract class AbstractNetworkBlockEntity extends BlockEntity {
     @Override
     protected void readNbt(NbtCompound nbt, WrapperLookup registries) {
         super.readNbt(nbt, registries);
+        WRS.LOGGER.info(this + ": read nbt " + networkName + " to " + nbt.getString("network_name"));
         registerNetworkName(nbt.getString("network_name"));
     }        
 
     @Override
     protected void writeNbt(NbtCompound nbt, WrapperLookup registries) {
-        WRS.LOGGER.info("write nbt " + networkName);
+        WRS.LOGGER.info(this + ": write nbt " + networkName);
         super.writeNbt(nbt, registries);
         nbt.putString("network_name", networkName);
     }
 
     protected void registerNetworkName(String networkName) {
-        WRS.LOGGER.info("registering network name (old =" + getNetworkName() + ") to " + networkName);
+        WRS.LOGGER.info("registering network name (old=" + getNetworkName() + ") to " + networkName);
         this.networkName = networkName;
     }
 

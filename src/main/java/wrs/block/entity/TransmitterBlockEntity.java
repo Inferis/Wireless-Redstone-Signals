@@ -12,8 +12,8 @@ public class TransmitterBlockEntity extends AbstractNetworkBlockEntity {
 
     @Override
     protected void registerNetworkName(String networkName) {
-        if (getNetworkName() != networkName) {
-            Networks.removeTransmitter(getNetworkName(), pos);
+        if (!getNetworkName().equals(networkName)) {
+            Networks.removeTransmitter(pos, getNetworkName());
         }
         super.registerNetworkName(networkName);
         Networks.addTransmitter(pos, networkName);

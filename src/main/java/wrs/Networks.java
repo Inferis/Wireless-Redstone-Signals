@@ -6,7 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import net.minecraft.block.Block;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class Networks {
     private static HashMap<String, Network> networks = new LinkedHashMap<>();
@@ -66,6 +69,18 @@ public class Networks {
         var network = networks.get(networkName);
         if (network != null) {
             network.removeReceiver(pos);
+        }
+    }
+
+    public static void propagateUpdate(String networkName, World world) {
+        var transmitter = getTransmitters(networkName).getLast();
+        var power = world.getReceivedRedstonePower(transmitter);
+        for (var receiver: getReceivers(networkName)) {
+            var receiverState = world.getBlockState(receiver);
+            receiverState = receiverState
+                .with(Properties.POWERED, power > 0)
+                .with(Properties.POWER, power);
+            world.setBlockState(receiver, receiverState, Block.NOTIFY_ALL);
         }
     }
 

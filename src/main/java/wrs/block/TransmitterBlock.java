@@ -21,6 +21,7 @@ import wrs.Networks;
 import wrs.block.entity.ReceiverBlockEntity;
 import wrs.block.entity.TransmitterBlockEntity;
 import wrs.item.LinkerItem;
+import wrs.item.WRSComponents;
 
 public class TransmitterBlock extends Block implements BlockEntityProvider {
     public TransmitterBlock(Settings settings) {
@@ -68,14 +69,18 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
         super.onBroken(world, pos, state);
         updateTransmittedPower(world, pos, 0);
         if (world.getBlockEntity(pos) instanceof ReceiverBlockEntity transmitterBlockEntity) {
-            Networks.removeTransmitter(transmitterBlockEntity.getNetworkName(), pos);
+            Networks.removeTransmitter(pos, transmitterBlockEntity.getNetworkName());
         }
     }
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient && world.getBlockEntity(pos) instanceof TransmitterBlockEntity transmitterBlockEntity) {
-            if (!(player.getMainHandStack().getItem() instanceof LinkerItem)) {
+            var stack = player.getMainHandStack();
+            if (stack.getItem() instanceof LinkerItem) {
+                stack.set(WRSComponents.NETWORK_NAME_COMPONENT_TYPE, transmitterBlockEntity.getNetworkName());
+            }
+            else {
                 ServerPlayNetworking.send((ServerPlayerEntity)player, transmitterBlockEntity.getOpenConfigPanelPayload(pos));
             }
             return ActionResult.SUCCESS;
@@ -106,12 +111,12 @@ public class TransmitterBlock extends Block implements BlockEntityProvider {
                     }
                     else {
                         // doesn't match for whatever reason, remove
-                        Networks.removeReceiver(transmitterName, pos);
+                        Networks.removeReceiver(receiverPos, transmitterName);
                     }
                 }
                 else {
                     // doesn't exist anymore
-                    Networks.removeReceiver(transmitterName, pos);
+                    Networks.removeReceiver(receiverPos, transmitterName);
                 }
             }
         }
