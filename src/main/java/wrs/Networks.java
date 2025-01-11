@@ -4,11 +4,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.util.math.BlockPos;
 
 public class Networks {
     private static HashMap<String, Network> networks = new LinkedHashMap<>();
+
+    public static Set<String> getNetworkNames() {
+        return networks.keySet();
+    }
 
     public static void addTransmitter(BlockPos pos, String networkName) {
         var network = networks.get(networkName);
@@ -26,6 +31,17 @@ public class Networks {
             networks.put(networkName, network);
         }
         network.addReceiver(pos);
+        WRS.LOGGER.info("adding receiver " + pos + " from " + networkName);
+    }
+
+    public static List<BlockPos> getTransmitters(String networkName) {
+        var network = networks.get(networkName);
+        if (network != null) {
+            return new LinkedList<BlockPos>(network.transmitters);
+        }
+        else {
+            return new LinkedList<BlockPos>();
+        }
     }
 
     public static List<BlockPos> getReceivers(String networkName) {
@@ -38,14 +54,15 @@ public class Networks {
         }
     }
 
-    public static void removeTransmitter(String networkName, BlockPos pos) {
+    public static void removeTransmitter(BlockPos pos, String networkName) {
         var network = networks.get(networkName);
         if (network != null) {
             network.transmitters.remove(pos);
         }
     }
 
-    public static void removeReceiver(String networkName, BlockPos pos) {
+    public static void removeReceiver(BlockPos pos, String networkName) {
+        WRS.LOGGER.info("remove receiver " + pos + " from " + networkName);
         var network = networks.get(networkName);
         if (network != null) {
             network.removeReceiver(pos);
