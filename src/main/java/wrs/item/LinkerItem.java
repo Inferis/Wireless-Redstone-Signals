@@ -11,7 +11,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
-import wrs.WRS;
 import wrs.WRSSounds;
 import wrs.block.entity.ReceiverBlockEntity;
 import wrs.block.entity.TransmitterBlockEntity;
