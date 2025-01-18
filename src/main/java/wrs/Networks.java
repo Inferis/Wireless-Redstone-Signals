@@ -72,15 +72,18 @@ public class Networks {
     }
 
     public static void propagateUpdate(String networkName, World world) {
-        var transmitter = getTransmitters(networkName).getLast();
-        var power = world.getReceivedRedstonePower(transmitter);
-        for (var receiver: getReceivers(networkName)) {
-            if (world.getBlockEntity(receiver) instanceof AbstractNetworkBlockEntity) {
-                var receiverState = world.getBlockState(receiver);
-                receiverState = receiverState
-                    .with(Properties.POWERED, power > 0)
-                    .with(Properties.POWER, power);
-                world.setBlockState(receiver, receiverState, Block.NOTIFY_ALL);
+        var transmitters = getTransmitters(networkName);
+        if (!transmitters.isEmpty()) {
+            var transmitter = getTransmitters(networkName).getLast();
+            var power = world.getReceivedRedstonePower(transmitter);
+            for (var receiver: getReceivers(networkName)) {
+                if (world.getBlockEntity(receiver) instanceof AbstractNetworkBlockEntity) {
+                    var receiverState = world.getBlockState(receiver);
+                    receiverState = receiverState
+                        .with(Properties.POWERED, power > 0)
+                        .with(Properties.POWER, power);
+                    world.setBlockState(receiver, receiverState, Block.NOTIFY_ALL);
+                }
             }
         }
     }
